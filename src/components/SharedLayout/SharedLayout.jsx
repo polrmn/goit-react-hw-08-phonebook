@@ -21,16 +21,14 @@ const SharedLayout = () => {
     dispatch(getUserThunk());
     if (token) {
       navigate('/contacts')
-      return
     }
-    navigate('/login')
+  
   },[dispatch, navigate, token])
 
-  const handlerLogOut = () => {
-    dispatch(logOutThunk())
-    navigate('/login')
-
-  }
+  const logOuthandler = () => {
+    dispatch(logOutThunk());
+    navigate('/login');
+  };
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -46,20 +44,19 @@ const SharedLayout = () => {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               {userName ? `${userName}'s phonebook` : 'Phonebook'}
             </Typography>
-            {token ? 
+            {token ? (
               <>
-              <NavBarLink to="/contacts">
-                CONTACTS
-              </NavBarLink>
-              <Button onClick={handlerLogOut} color="inherit">
-                LOG OUT
-              </Button>
-              </> :
-              <>
-              <NavBarLink to="/login">SIGN IN</NavBarLink>
-              <NavBarLink to="/register">SIGN UP</NavBarLink>
+                <NavBarLink to="/contacts">CONTACTS</NavBarLink>
+                <Button onClick={logOuthandler} color="inherit">
+                  LOG OUT
+                </Button>
               </>
-            }
+            ) : (
+              <>
+                <NavBarLink to="/login">SIGN IN</NavBarLink>
+                <NavBarLink to="/register">SIGN UP</NavBarLink>
+              </>
+            )}
           </Toolbar>
         </AppBar>
       </Box>
